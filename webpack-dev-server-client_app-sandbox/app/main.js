@@ -8,3 +8,7 @@ function cliccami() {
 }
 
 document.getElementById('theButton').onclick = cliccami;
+
+if (module.hot) {
+  module.hot.accept();
+}
