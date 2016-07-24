@@ -1,0 +1,16 @@
+{
+  "name": "webpack-dev-server-sandbox",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  },
+  "author": "Marco Faustinelli - Muzietto",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "webpack": "^1.12.13",
+    "webpack-dev-server": "^1.14.1"
+  }
+}
