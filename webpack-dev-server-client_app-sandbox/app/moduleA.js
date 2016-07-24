@@ -1,5 +1,5 @@
 'use string'
 
-var myA = 'aaAAAA';
+var myA = 'aa';
 
 module.exports = myA;
