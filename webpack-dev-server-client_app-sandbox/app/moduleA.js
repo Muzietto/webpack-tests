@@ -1,6 +1,6 @@
 'use strict'
 
-var myA = function() { return 'aAAA'; }
+var myA = function() { return 'a'; }
 
 module.exports = myA;
 
