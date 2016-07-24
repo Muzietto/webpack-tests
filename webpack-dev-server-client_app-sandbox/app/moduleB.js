@@ -1,6 +1,6 @@
 'use strict'
 
-var myB = 'b';
+function myB() { return 'b'; }
 
 module.exports = myB;
 

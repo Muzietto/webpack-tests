@@ -1,9 +1,9 @@
 'use strict'
 
-var myA = 'a';
+var myA = function() { return 'aAAA'; }
+
+module.exports = myA;
 
 if (module.hot) {
   module.hot.accept();
 }
-
-module.exports = myA;
