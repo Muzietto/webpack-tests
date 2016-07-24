@@ -1,3 +1,5 @@
+'use strict'
+
 var a = require('./moduleA');
 var b = require('./moduleB');  
   
