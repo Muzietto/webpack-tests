@@ -31,5 +31,7 @@
     "webpack-dev-server": "3.4.1",
     "webpack-merge": "4.2.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "moment": "^2.24.0"
+  }
 }
