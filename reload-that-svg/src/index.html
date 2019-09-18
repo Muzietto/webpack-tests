@@ -1,57 +1,57 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>FLOORPLAN</title>
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.js"
-      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-      crossorigin="anonymous"></script>
-  </head>
+
+<head>
+  <title>FLOORPLAN</title>
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+</head>
+
 <body>
+  <div id="header">
+    <button id="authorize_button" style="display: none;">Authorize</button>
+  </div>
+  <div id="main">
+    <svg height="800" width="100%">
 
-<div id="main">
-  <svg height="800" width="100%">
+      <defs>
+        <g id="room_group" data-name="Room Group" fill="none">
+          <rect x="0" y="0" width="200" height="100" fill="grey"></rect>
+        </g>
+      </defs>
 
-    <defs>
-      <g id="room_group" data-name="Room Group" fill="none">
-        <rect x="0" y="0" width="200" height="100" fill="grey"></rect>
+      <g id="office" fill="none">
+        <path stroke="black" d="m25 25 l800 0 l0 200 H300 V600 H25 Z" />
       </g>
-    </defs>
+      <!-- Symbol Usage (http://frontendbabel.info/articles/svg-grouping-and-reusing-elements/) -->
+      <!-- also https://stackoverflow.com/questions/1422238/svg-about-using-defs-and-use-with-variable-text-values -->
+      <g id="london" transform="translate(50 40)">
+        <use xlink:href="#room_group" />
+        <text x="0" y="50" font-family="Verdana" font-size="35" fill="white">London</text>
+      </g>
+      <g id="paris" transform="translate(350 340)">
+        <use xlink:href="#room_group" />
+        <text x="0" y="50" font-family="Verdana" font-size="35" fill="white">Paris</text>
+      </g>
 
-    <g id="office" fill="none">
-      <path stroke="black" d="m25 25 l800 0 l0 200 H300 V600 H25 Z" />
-    </g>
-    <!-- Symbol Usage (http://frontendbabel.info/articles/svg-grouping-and-reusing-elements/) -->
-    <!-- also https://stackoverflow.com/questions/1422238/svg-about-using-defs-and-use-with-variable-text-values -->
-    <g id="london" transform="translate(50 40)">
-      <use xlink:href="#room_group" />
-      <text x="0"
-            y="50"
-            font-family="Verdana"
-            font-size="35"
-            fill="white">London</text>
-    </g>
-    <g id="paris" transform="translate(350 340)">
-      <use xlink:href="#room_group" />
-      <text x="0"
-            y="50"
-            font-family="Verdana"
-            font-size="35"
-            fill="white">Paris</text>
-    </g>
+    </svg>
+  </div>
 
-  </svg>
-</div>
+  m = move to<br />
+  l = line to<br />
+  H = horizontal line to<br />
+  V = vertical line to<br />
+  C = curveto<br />
+  S = smooth curveto<br />
+  Q = quadratic Bézier curve<br />
+  T = smooth quadratic Bézier curveto<br />
+  A = elliptical Arc<br />
+  Z = close path <br />
 
-m = move to<br/>
-l = line to<br/>
-H = horizontal line to<br/>
-V = vertical line to<br/>
-C = curveto<br/>
-S = smooth curveto<br/>
-Q = quadratic Bézier curve<br/>
-T = smooth quadratic Bézier curveto<br/>
-A = elliptical Arc<br/>
-Z = close path <br/>
+  <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleLoadGoogleApiScript()"
+    onreadystatechange="if (this.readyState === 'complete') this.onload()">
+  </script>
+
 </body>
+
 </html>
