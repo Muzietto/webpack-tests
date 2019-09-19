@@ -16,22 +16,30 @@
 
       <defs>
         <g id="room_group" data-name="Room Group">
-          <rect x="0" y="0" width="200" height="100"></rect>
+          <rect x="0" y="0" width="100" height="80"></rect>
         </g>
       </defs>
 
       <g id="office" fill="none">
-        <path stroke="black" d="m25 25 l800 0 l0 200 H300 V600 H25 Z" />
+        <path stroke="black" d="m25 25 l800 0 l0 200 H400 V400 H200 V800 H25 Z" />
       </g>
       <!-- Symbol Usage (http://frontendbabel.info/articles/svg-grouping-and-reusing-elements/) -->
       <!-- also https://stackoverflow.com/questions/1422238/svg-about-using-defs-and-use-with-variable-text-values -->
-      <g id="london" transform="translate(50 40)">
+      <g id="london" transform="translate(700 230)">
         <use xlink:href="#room_group" />
-        <text x="0" y="50" font-family="Verdana" font-size="35" fill="white">London</text>
+        <text x="0" y="50" font-family="Verdana" font-size="14" fill="white">London</text>
       </g>
-      <g id="paris" transform="translate(350 340)">
+      <g id="paris" transform="translate(550 230)">
         <use xlink:href="#room_group" />
-        <text x="0" y="50" font-family="Verdana" font-size="35" fill="white">Paris</text>
+        <text x="0" y="50" font-family="Verdana" font-size="14" fill="white">Paris</text>
+      </g>
+      <g id="madrid" transform="translate(485 250) rotate(90)">
+        <use xlink:href="#room_group" />
+        <text x="0" y="50" font-family="Verdana" font-size="14" fill="white">Madrid</text>
+      </g>
+      <g id="berlin" transform="translate(290 405) rotate(90)">
+        <use xlink:href="#room_group" />
+        <text x="0" y="50" font-family="Verdana" font-size="14" fill="white">Berlin</text>
       </g>
 
     </svg>
