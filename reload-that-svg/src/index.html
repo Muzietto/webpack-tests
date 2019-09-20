@@ -15,8 +15,11 @@
     <svg height="800" width="100%">
 
       <defs>
-        <g id="room_group" data-name="Room Group">
+        <g id="horizontal_room_group" data-name="Horizontal Room Group">
           <rect x="0" y="0" width="100" height="80"></rect>
+        </g>
+        <g id="vertical_room_group" data-name="Vertical Room Group">
+          <rect x="0" y="0" width="80" height="100"></rect>
         </g>
       </defs>
 
@@ -26,25 +29,34 @@
       <!-- Symbol Usage (http://frontendbabel.info/articles/svg-grouping-and-reusing-elements/) -->
       <!-- also https://stackoverflow.com/questions/1422238/svg-about-using-defs-and-use-with-variable-text-values -->
       <g id="london" transform="translate(700 230)">
-        <use xlink:href="#room_group" />
-        <text x="0" y="50" font-family="Verdana" font-size="14" fill="white">London</text>
+        <use xlink:href="#horizontal_room_group" />
+        <text x="0" y="50" font-family="Verdana" font-size="14" fill="white">Londra</text>
       </g>
       <g id="paris" transform="translate(550 230)">
-        <use xlink:href="#room_group" />
-        <text x="0" y="50" font-family="Verdana" font-size="14" fill="white">Paris</text>
+        <use xlink:href="#horizontal_room_group" />
+        <text x="0" y="50" font-family="Verdana" font-size="14" fill="white">Parigi</text>
       </g>
-      <g id="madrid" transform="translate(485 250) rotate(90)">
-        <use xlink:href="#room_group" />
+      <g id="madrid" transform="translate(405 230)">
+        <use xlink:href="#vertical_room_group" />
         <text x="0" y="50" font-family="Verdana" font-size="14" fill="white">Madrid</text>
       </g>
-      <g id="berlin" transform="translate(290 405) rotate(90)">
-        <use xlink:href="#room_group" />
-        <text x="0" y="50" font-family="Verdana" font-size="14" fill="white">Berlin</text>
+      <g id="berlin" transform="translate(210 405)">
+        <use xlink:href="#vertical_room_group" />
+        <text x="0" y="50" font-family="Verdana" font-size="14" fill="white">Berlino</text>
       </g>
 
     </svg>
   </div>
 
+  <div id="report" style="position: absolute;right: 100px;top:700px;"></div>
+
+  <div>
+    <input id="startDate" type="datetime-local" placeholder="Data inizio" />
+    <input id="endDate" type="datetime-local" placeholder="Data fine" />
+    <input id="searchBtn" type="button" value="Cerca" />
+  </div>
+
+  <br><br>
   m = move to<br />
   l = line to<br />
   H = horizontal line to<br />
@@ -56,7 +68,7 @@
   A = elliptical Arc<br />
   Z = close path <br />
 
-  <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleLoadGoogleApiScript()"
+  <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};setTimeout(() => { handleLoadGoogleApiScript(); }, 200);"
     onreadystatechange="if (this.readyState === 'complete') this.onload()">
   </script>
 
