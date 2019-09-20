@@ -1,11 +1,15 @@
 const moment = require('moment');
 
-moment.locale('it');
+const {
+  GOOGLE_SCOPES,
+  GOOGLE_API_KEY,
+  GOOGLE_CLIENT_ID,
+  GOOGLE_DISCOVERY_DOCS,
+} = require('./constants');
 
-const GOOGLE_CLIENT_ID = '953923587361-l0hislojka0lp6osmgdllr0s0g7gs1vf.apps.googleusercontent.com';
-const GOOGLE_API_KEY = 'AIzaSyCAHomCUKuMS48g2g8czmbOmQGpdZIubic';
-const GOOGLE_DISCOVERY_DOCS = ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'];
-const GOOGLE_SCOPES = 'https://www.googleapis.com/auth/calendar.readonly';
+const { COPERNICO_MEETING_ROOMS } = require('./meetingRooms');
+
+moment.locale('it');
 
 const googleAuthButton = document.getElementById('authorize_button');
 
@@ -16,13 +20,15 @@ $('#main').css({
 // setTimeout(() => {
 //   $('#london text').text('No longer London');
 // }, 1000);
-
 // if we want to manipulate svg elements we gotta load https://github.com/kbwood/svg
-setTimeout(() => {
-  $('#paris').css({ border: '3px solid red' });
-}, 2000);
 
 function handleLoadGoogleApiScript() {
+
+  moment().startOf('day');
+  
+  $("#startDate").val(moment().startOf('day').add(8, 'hours').format("YYYY-MM-DD[T]HH:mm"));
+  $("#endDate").val(moment().endOf('day').subtract(4, 'hours').add(1, 'minute').format("YYYY-MM-DD[T]HH:mm"));
+
   gapi.load('client:auth2', initGoogleClient);
 }
 
@@ -52,23 +58,16 @@ function updateGoogleAccountStatus(isSignedIn) {
   }
 }
 
-function handleGoogleAuthClick(event) {
+function handleGoogleAuthClick() {
   gapi.auth2.getAuthInstance().signIn();
 }
 
 function fetchTodayRoomStatus() {
-  const todayStartDateTime = moment().startOf('day');
-  const todayEndDateTime = moment().endOf('day'); 
+  const todayStartDateTime = moment($("#startDate").val());
+  const todayEndDateTime = moment($("#endDate").val()); 
 
   gapi.client.calendar.freebusy.query({
-    items: [
-      { id: 'easywelfare.com_3435383934323433353736@resource.calendar.google.com' }, // sala londra
-      { id: 'easywelfare.com_3839343236323032353433@resource.calendar.google.com' }, // sala tokio
-      { id: 'easywelfare.com_373234383237382d373237@resource.calendar.google.com' }, // sala madrid
-      { id: 'easywelfare.com_3438303832363031373735@resource.calendar.google.com' }, // sala a300
-      { id: 'easywelfare.com_343630323636352d363735@resource.calendar.google.com' }, // sala berlino
-      { id: 'easywelfare.com_3437363934393835393631@resource.calendar.google.com' }  // sala parigi
-    ],
+    items: COPERNICO_MEETING_ROOMS.map(room => ({ id: room.id })),
     timeMin: todayStartDateTime,
     timeMax: todayEndDateTime,
   }).then(function(response) {
@@ -78,21 +77,28 @@ function fetchTodayRoomStatus() {
 
     if (response && response.result && response.result.calendars) {
       const { calendars } = response.result;
-      const parisRoomBusyCalendar = calendars['easywelfare.com_3437363934393835393631@resource.calendar.google.com'];
 
-      const isParisRoomBusy = parisRoomBusyCalendar.busy.filter(busy => (now.isSameOrAfter(moment(busy.start)) && now.isSameOrBefore(moment(busy.end))) );
 
-      if (isParisRoomBusy.length > 0) {
-        $('#paris').css({ fill: "#ff0000" });
-      }
+      Object.keys(calendars).forEach(key => {
+        const roomCalendar = calendars[key];
+        const isRoomBusy = roomCalendar.busy.filter(busy => (now.isSameOrAfter(moment(busy.start)) && now.isSameOrBefore(moment(busy.end))) );
+        
+        if (isRoomBusy.length > 0) {
+          console.log(isRoomBusy)
 
-      const londonRoomBusyCalendar = calendars['easywelfare.com_3435383934323433353736@resource.calendar.google.com'];
+          const copernicoMeetingRoom = COPERNICO_MEETING_ROOMS.filter(room => room.id === key)[0];
+          const { name, domId } = copernicoMeetingRoom;
+          
 
-      const isLondonRoomBusy = londonRoomBusyCalendar.busy.filter(busy => (now.isSameOrAfter(moment(busy.start)) && now.isSameOrBefore(moment(busy.end))) );
+          
+          moment(isRoomBusy[0].start).format('lll')
+          $(`#${domId}`).css({ fill: "#ff0000" });
+          $('#report').append(`
+            <b>${name.charAt(0).toUpperCase() + name.substring(1, name.length)}</b> -> Libera dalle ore ${moment(isRoomBusy[0].end).format('LT')}<br>
+          `);
+        }
 
-      if (isLondonRoomBusy.length > 0) {
-        $('#london').css({ fill: "#ff0000" });
-      }
+      });
     }
     
   });
