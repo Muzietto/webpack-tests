@@ -9,25 +9,25 @@ const {
 
 const { COPERNICO_MEETING_ROOMS } = require('./meetingRooms');
 
+require('./datetimepicker/datetimepicker');
+require('./datetimepicker/datetimepicker.css');
+
 moment.locale('it');
 
 const googleAuthButton = document.getElementById('authorize_button');
 
-$('#main').css({
-  border: '3px dashed red',
-});
-
-// setTimeout(() => {
-//   $('#london text').text('No longer London');
-// }, 1000);
-// if we want to manipulate svg elements we gotta load https://github.com/kbwood/svg
+const busyColor = '#bf3e2f';
+const freeColor = '#20825b'
+const bookedColor = '#ddaa73';
 
 function handleLoadGoogleApiScript() {
 
-  moment().startOf('day');
-  
-  $("#startDate").val(moment().startOf('day').add(8, 'hours').format("YYYY-MM-DD[T]HH:mm"));
-  $("#endDate").val(moment().endOf('day').subtract(4, 'hours').add(1, 'minute').format("YYYY-MM-DD[T]HH:mm"));
+  $('#startDate').dateTimePicker({ selectData: moment() });
+  //$('#endDate').dateTimePicker({ selectData: moment().endOf('day').subtract(4, 'hours').add(1, 'minute'), isStartDate: false });
+
+  $('#free').css({ fill: freeColor });
+  $('#busy').css({ fill: busyColor });
+  $('#booked').css({ fill: bookedColor });
 
   gapi.load('client:auth2', initGoogleClient);
 }
@@ -52,7 +52,7 @@ function initGoogleClient() {
 function updateGoogleAccountStatus(isSignedIn) {
   if (isSignedIn) {
     googleAuthButton.style.display = 'none';
-    fetchTodayRoomStatus();
+    fetchRoomStatus();
   } else {
     googleAuthButton.style.display = 'block';
   }
@@ -62,11 +62,11 @@ function handleGoogleAuthClick() {
   gapi.auth2.getAuthInstance().signIn();
 }
 
-function fetchTodayRoomStatus() {
-  const todayStartDateTime = moment($("#startDate").val());
-  const todayEndDateTime = moment($("#endDate").val()); 
+function fetchRoomStatus() {
+  const todayStartDateTime = START_DATE;
+  const todayEndDateTime = moment(START_DATE).endOf('day'); 
 
-  console.log('cerco con parametri: ', todayStartDateTime, todayEndDateTime);
+  console.log('cerco con parametri: ', todayStartDateTime.format());
 
   gapi.client.calendar.freebusy.query({
     items: COPERNICO_MEETING_ROOMS.map(room => ({ id: room.id })),
@@ -78,28 +78,30 @@ function fetchTodayRoomStatus() {
     if (response && response.result && response.result.calendars) {
       const { calendars } = response.result;
 
-      console.log('calendars: ', calendars);
-
       $('#report').html('');
 
       Object.keys(calendars).forEach(key => {
         const roomCalendar = calendars[key];
-        const isRoomBusy = roomCalendar.busy.filter(busy => (now.isSameOrAfter(moment(busy.start)) && now.isSameOrBefore(moment(busy.end))) );
+        const isRoomBusy = roomCalendar.busy.filter(busy => (todayStartDateTime.isSameOrAfter(moment(busy.start)) && todayStartDateTime.isSameOrBefore(moment(busy.end))) );
         
         const copernicoMeetingRoom = COPERNICO_MEETING_ROOMS.filter(room => room.id === key)[0];
         const { name, domId } = copernicoMeetingRoom;
 
         if (isRoomBusy.length > 0) {
-          console.log(isRoomBusy);
-          moment(isRoomBusy[0].start).format('lll');
-          $(`#${domId}`).css({ fill: "#ff0000" });
-          
-          $('#report').append(`
-            <b>${name.charAt(0).toUpperCase() + name.substring(1, name.length)}</b> -> Libera dalle ore ${moment(isRoomBusy[0].end).format('LT')}<br>
-          `);
+          $(`#${domId}`).css({ fill: busyColor });
+        } else if (roomCalendar.busy.length > 0) {
+          $(`#${domId}`).css({ fill: bookedColor });
         } else {
-          $(`#${domId}`).css({ fill: "#000000" });
+          $(`#${domId}`).css({ fill: freeColor });
+          $(`#${domId}_text > text`).html('');
         }
+        console.log(roomCalendar);
+
+        let html = '';
+        roomCalendar.busy.forEach(busy => {
+          html += `<tspan x="0" dy="1.2em">${moment(busy.start).isSameOrBefore(todayStartDateTime) ? 'fino alle' : `${moment(busy.start).format('LT')} -`} ${moment(busy.end).format('LT')}</tspan>`;
+        });
+        $(`#${domId}_text > text`).html(html);
 
       });
     }
@@ -107,13 +109,8 @@ function fetchTodayRoomStatus() {
   });
 }
 
-$("#paris").on("click",function(){
-  console.log('click');
-  $("#paris").attr("background","#ff0000");   
-});
-
 $('#searchBtn').on('click', function() {
-  fetchTodayRoomStatus();
+  fetchRoomStatus();
 });
 
 window.handleLoadGoogleApiScript = handleLoadGoogleApiScript;
