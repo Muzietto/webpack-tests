@@ -66,36 +66,39 @@ function fetchTodayRoomStatus() {
   const todayStartDateTime = moment($("#startDate").val());
   const todayEndDateTime = moment($("#endDate").val()); 
 
+  console.log('cerco con parametri: ', todayStartDateTime, todayEndDateTime);
+
   gapi.client.calendar.freebusy.query({
     items: COPERNICO_MEETING_ROOMS.map(room => ({ id: room.id })),
     timeMin: todayStartDateTime,
     timeMax: todayEndDateTime,
   }).then(function(response) {
-    console.log('freebusy: ', response);
-
     const now = moment();
 
     if (response && response.result && response.result.calendars) {
       const { calendars } = response.result;
 
+      console.log('calendars: ', calendars);
+
+      $('#report').html('');
 
       Object.keys(calendars).forEach(key => {
         const roomCalendar = calendars[key];
         const isRoomBusy = roomCalendar.busy.filter(busy => (now.isSameOrAfter(moment(busy.start)) && now.isSameOrBefore(moment(busy.end))) );
         
+        const copernicoMeetingRoom = COPERNICO_MEETING_ROOMS.filter(room => room.id === key)[0];
+        const { name, domId } = copernicoMeetingRoom;
+
         if (isRoomBusy.length > 0) {
-          console.log(isRoomBusy)
-
-          const copernicoMeetingRoom = COPERNICO_MEETING_ROOMS.filter(room => room.id === key)[0];
-          const { name, domId } = copernicoMeetingRoom;
-          
-
-          
-          moment(isRoomBusy[0].start).format('lll')
+          console.log(isRoomBusy);
+          moment(isRoomBusy[0].start).format('lll');
           $(`#${domId}`).css({ fill: "#ff0000" });
+          
           $('#report').append(`
             <b>${name.charAt(0).toUpperCase() + name.substring(1, name.length)}</b> -> Libera dalle ore ${moment(isRoomBusy[0].end).format('LT')}<br>
           `);
+        } else {
+          $(`#${domId}`).css({ fill: "#000000" });
         }
 
       });
@@ -107,6 +110,10 @@ function fetchTodayRoomStatus() {
 $("#paris").on("click",function(){
   console.log('click');
   $("#paris").attr("background","#ff0000");   
+});
+
+$('#searchBtn').on('click', function() {
+  fetchTodayRoomStatus();
 });
 
 window.handleLoadGoogleApiScript = handleLoadGoogleApiScript;
