@@ -1,23 +1,35 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: './src/index.js',
+    main: './src/index.js',
   },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-      title: 'FLOORPLAN',
-      filename: './index.html',
-    }),
-  ],
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
   },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new CopyWebpackPlugin([
+      { from: 'src/lib', to: 'lib' }, // '' means dist
+    ]),
+    new HtmlWebpackPlugin({
+      inject: false,
+      template: './src/index.html',
+      filename: 'index.html',
+      title: 'FLOORPLAN',
+      files: {
+        chunks: {
+          head: {
+            entry: './lib/jQuery.js',
+          }
+        },
+      },
+    }),
+  ],
   optimization: {
     splitChunks: {
       cacheGroups: {
