@@ -8,8 +8,11 @@
       content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
   />
   <title><%= htmlWebpackPlugin.options.title %></title>
-  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-    crossorigin="anonymous"></script>
+
+  <% if (htmlWebpackPlugin.options.files.chunks.head) { %>
+    <script src="<%= htmlWebpackPlugin.options.files.chunks.head.entry %>"></script>
+  <% } %>
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script>
     let START_DATE;
@@ -109,10 +112,16 @@
   A = elliptical Arc<br />
   Z = close path <br />
   </div>
+
   <script async defer src="https://apis.google.com/js/api.js"
     onload="this.onload=function(){};setTimeout(() => { handleLoadGoogleApiScript(); }, 200);"
     onreadystatechange="if (this.readyState === 'complete') this.onload()">
-    </script>
+  </script>
+
+  <pre><%= JSON.stringify(htmlWebpackPlugin.options) %></pre>
+
+  <script src="<%= htmlWebpackPlugin.files.chunks.vendors.entry %>"></script>
+  <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
 
 </body>
 
