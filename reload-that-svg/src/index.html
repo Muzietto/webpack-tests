@@ -12,7 +12,7 @@
   <% if (htmlWebpackPlugin.options.files.chunks.head) { %>
     <script src="<%= htmlWebpackPlugin.options.files.chunks.head.entry %>"></script>
   <% } %>
-  
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script>
     let START_DATE;
@@ -119,6 +119,7 @@
   </script>
 
   <pre><%= JSON.stringify(htmlWebpackPlugin.options) %></pre>
+  <pre><%= JSON.stringify(htmlWebpackPlugin.files) %></pre>
 
   <script src="<%= htmlWebpackPlugin.files.chunks.vendors.entry %>"></script>
   <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
