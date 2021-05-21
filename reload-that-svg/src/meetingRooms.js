@@ -22,8 +22,8 @@ export const COPERNICO_MEETING_ROOMS = [
     id: 'easywelfare.com_343630323636352d363735@resource.calendar.google.com',
     name: 'Berlino',
     domId: 'berlin',
-    position: { x: 210 , y: 405 },
-  }
+    position: { x: 210, y: 405 },
+  },
 ];
 
 // { id: 'easywelfare.com_3839343236323032353433@resource.calendar.google.com' }, // sala tokio

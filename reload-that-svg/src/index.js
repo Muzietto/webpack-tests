@@ -17,13 +17,13 @@ moment.locale('it');
 const googleAuthButton = document.getElementById('authorize_button');
 
 const busyColor = '#bf3e2f';
-const freeColor = '#20825b'
+const freeColor = '#20825b';
 const bookedColor = '#ddaa73';
 
 function handleLoadGoogleApiScript() {
 
   $('#startDate').dateTimePicker({ selectData: moment() });
-  //$('#endDate').dateTimePicker({ selectData: moment().endOf('day').subtract(4, 'hours').add(1, 'minute'), isStartDate: false });
+  // $('#endDate').dateTimePicker({ selectData: moment().endOf('day').subtract(4, 'hours').add(1, 'minute'), isStartDate: false });
 
   $('#free').css({ fill: freeColor });
   $('#busy').css({ fill: busyColor });
@@ -37,14 +37,14 @@ function initGoogleClient() {
     apiKey: GOOGLE_API_KEY,
     clientId: GOOGLE_CLIENT_ID,
     discoveryDocs: GOOGLE_DISCOVERY_DOCS,
-    scope: GOOGLE_SCOPES
-  }).then(function () {
+    scope: GOOGLE_SCOPES,
+  }).then(() => {
     // Listen for sign-in state changes.
     gapi.auth2.getAuthInstance().isSignedIn.listen(updateGoogleAccountStatus);
     // Handle the initial sign-in state.
     updateGoogleAccountStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
     googleAuthButton.onclick = handleGoogleAuthClick;
-  }, function (error) {
+  }, error => {
     console.log(error);
   });
 }
@@ -64,7 +64,7 @@ function handleGoogleAuthClick() {
 
 function fetchRoomStatus() {
   const todayStartDateTime = START_DATE;
-  const todayEndDateTime = moment(START_DATE).endOf('day'); 
+  const todayEndDateTime = moment(START_DATE).endOf('day');
 
   console.log('cerco con parametri: ', todayStartDateTime.format());
 
@@ -72,7 +72,9 @@ function fetchRoomStatus() {
     items: COPERNICO_MEETING_ROOMS.map(room => ({ id: room.id })),
     timeMin: todayStartDateTime,
     timeMax: todayEndDateTime,
-  }).then(function(response) {
+  }).then(response => {
+
+    // eslint-disable-next-line no-unused-vars
     const now = moment();
 
     if (response && response.result && response.result.calendars) {
@@ -83,8 +85,11 @@ function fetchRoomStatus() {
       Object.keys(calendars).forEach(key => {
         const roomCalendar = calendars[key];
         const isRoomBusy = roomCalendar.busy.filter(busy => (todayStartDateTime.isSameOrAfter(moment(busy.start)) && todayStartDateTime.isSameOrBefore(moment(busy.end))) );
-        
-        const copernicoMeetingRoom = COPERNICO_MEETING_ROOMS.filter(room => room.id === key)[0];
+
+        const [ copernicoMeetingRoom ] = COPERNICO_MEETING_ROOMS
+          .filter(room => room.id === key);
+
+        // eslint-disable-next-line no-unused-vars
         const { name, domId } = copernicoMeetingRoom;
 
         if (isRoomBusy.length > 0) {
@@ -105,11 +110,11 @@ function fetchRoomStatus() {
 
       });
     }
-    
+
   });
 }
 
-$('#searchBtn').on('click', function() {
+$('#searchBtn').on('click', () => {
   fetchRoomStatus();
 });
 

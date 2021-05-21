@@ -25,7 +25,7 @@ module.exports = {
         chunks: {
           head: {
             entry: './lib/jQuery.js',
-          }
+          },
         },
       },
     }),
