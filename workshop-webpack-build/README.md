@@ -1,31 +1,29 @@
-# 02-asset-management
+# 03-enter-plugins
 
 ## Usage
 
 - npm install
 
-## Available task
+## Available tasks
 
-- `npm run build`: will create the build inside `/dist` folder.
+- `npm run build-local`: will create the build inside `/dist` folder, featuring local runtime constants
 
-- `npm run watch`: will watch user files and build automatically inside `/dist` folder at each file change.
+- `npm run build-production`: will create the build inside `/dist` folder, featuring production runtime constants
 
 - `npm start`: serves files from the `/dist` folder (http://localhost:3100).
 
 # Observations
 
-- tag <style> in head
-- png copying/renaming in /dist
-- all assets required by index.js are placed in its source directory
+- index.html copied from /public to /disableHostCheck
+- added <script defer src="./bundle.js"></script> inside head
+- favicon link added to head
+- file copied from /constants/runtime to configuration.js
+- file is named according to ENV.NPC_ENV parameter
+- parameter window.ENV available in console
+
 
 ## Experiments in webpack.config.js
 
-- shift mode to 'production' (smaller file, but still no minification)
+- shift mode to 'production' (different file picked from /constants/runtime)
 
-- set devtools: true; observe main.js & check index.js in Chrome devtools
-
-- switch to url-loader in webpack.config.js & observe files in devtools
-
-- [optional] add loading fonts (https://webpack.js.org/guides/asset-management/#loading-fonts)
-
-- [optional] add loading XML/CSV/JSON data (https://webpack.js.org/guides/asset-management/#loading-data)
+- enable DefinePlugin in webpack.config.js and access new variable in index.js without polluting the global object
