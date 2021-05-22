@@ -1,16 +1,15 @@
 {
   "name": "workshop-webpack-build",
-  "version": "0.1.0",
-  "description": "",
+  "version": "1.0.0",
+  "description": "01-plain-webpacking",
   "private": true,
   "scripts": {
     "start": "node node_modules/http-server/bin/http-server -p 3100 -a localhost ./dist",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.config.js",
     "watch": "webpack --watch --config webpack.config.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Edenred",
   "license": "MIT",
   "dependencies": {
     "jquery": "^3.6.0"
