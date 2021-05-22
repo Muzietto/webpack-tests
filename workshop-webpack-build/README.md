@@ -17,6 +17,7 @@
 - tag <style> in head
 - png copying/renaming in /dist
 - all assets required by index.js are placed in its source directory
+- index.html must be present in dist before build - UNACCEPTABLE!
 
 ## Experiments in webpack.config.js
 

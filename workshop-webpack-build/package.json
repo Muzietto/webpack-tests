@@ -1,7 +1,7 @@
 {
   "name": "workshop-webpack-build",
   "version": "1.0.0",
-  "description": "01-plain-webpacking",
+  "description": "02-asset-management",
   "private": true,
   "scripts": {
     "start": "node node_modules/http-server/bin/http-server -p 3100 -a localhost ./dist",
