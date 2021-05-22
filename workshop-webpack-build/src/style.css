@@ -1,0 +1,8 @@
+
+.hello {
+  color: red;
+  height: 80px;
+  background: url('./astronaut.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}

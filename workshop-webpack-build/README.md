@@ -1,4 +1,4 @@
-# 01-plain-webpacking
+# 02-asset-management
 
 ## Usage
 
@@ -12,8 +12,20 @@
 
 - `npm start`: serves files from the `/dist` folder (http://localhost:3100).
 
+# Observations
+
+- tag <style> in head
+- png copying/renaming in /dist
+- all assets required by index.js are placed in its source directory
+
 ## Experiments in webpack.config.js
 
 - shift mode to 'production' (smaller file, but still no minification)
 
 - set devtools: true; observe main.js & check index.js in Chrome devtools
+
+- switch to url-loader in webpack.config.js & observe files in devtools
+
+- [optional] add loading fonts (https://webpack.js.org/guides/asset-management/#loading-fonts)
+
+- [optional] add loading XML/CSV/JSON data (https://webpack.js.org/guides/asset-management/#loading-data)

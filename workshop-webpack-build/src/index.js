@@ -1,3 +1,6 @@
 import $ from 'jquery';
+import './style.css';
 
-$('#root').html('Welcome, friend Webpack');
+$('#root')
+  .addClass('hello')
+  .html('Welcome, friend Webpack');
