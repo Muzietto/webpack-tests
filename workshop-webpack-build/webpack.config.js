@@ -25,23 +25,23 @@ module.exports = env => {
           test: /\.css$/i,
           use: ['style-loader', 'css-loader'],
         },
+        // {
+        //   test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        //   type: 'asset/resource',
+        // },
+        // swap previous test object with next one to use file-loader + url-loader
         {
-          test: /\.(png|svg|jpg|jpeg|gif)$/i,
-          type: 'asset/resource',
+          test: /.*\.(gif|png|jp(e*)g|svg)$/i,
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                limit: 21000,
+                name: 'images/[name].[ext]',
+              },
+            },
+          ],
         },
-      // swap previous test object with next one to use file-loader + url-loader
-      // {
-      //   test: /.*\.(gif|png|jp(e*)g|svg)$/i,
-      //   use: [
-      //     {
-      //       loader: 'url-loader',
-      //       options: {
-      //         limit: 21000,
-      //         name: 'images/[name].[ext]',
-      //       },
-      //     },
-      //   ],
-      // },
       ],
     },
     plugins: [
