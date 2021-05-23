@@ -2,8 +2,6 @@ import greetingInRootDiv from '@src/imported';
 
 greetingInRootDiv();
 
-console.log('ENV=', ENV);
-
 // eslint-disable-next-line no-undef
 console.log('ENV2=', ENV2);
 
