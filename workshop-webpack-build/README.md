@@ -1,4 +1,4 @@
-# 03-enter-plugins
+# 04-enter-babel
 
 ## Usage
 
@@ -14,16 +14,12 @@
 
 # Observations
 
-- index.html copied from /public to /disableHostCheck
-- added <script defer src="./bundle.js"></script> inside head
-- favicon link added to head
-- file copied from /constants/runtime to configuration.js
-- file is named according to ENV.NPC_ENV parameter
-- parameter window.ENV available in console
-
+- new file .babelrc; it is also possible to put a field 'babel' in package.json
+- rule for .js + resolve .js extension + @src alias added to webpack.config.js
+- imported.js included in bundle
+- recent ECMAScript operators transpiled into ES5 syntax
+- Array.prototype.flatMap NOT transpiled -->  must polyfill it yourself
 
 ## Experiments in webpack.config.js
 
-- shift mode to 'production' (different file picked from /constants/runtime)
-
-- enable DefinePlugin in webpack.config.js and access new variable in index.js without polluting the global object
+- put devtool: 'inline-source-map' in webpack.config.js to have sourcemaps
