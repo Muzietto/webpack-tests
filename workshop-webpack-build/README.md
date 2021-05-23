@@ -14,7 +14,7 @@
 
 # Observations
 
-- index.html copied from /public to /disableHostCheck
+- index.html copied from /public to /dist 
 - added <script defer src="./bundle.js"></script> inside head
 - favicon link added to head
 - file copied from /constants/runtime to configuration.js
