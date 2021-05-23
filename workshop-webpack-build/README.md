@@ -14,7 +14,7 @@
 
 # Observations
 
-- index.html copied from /public to /dist 
+- index.html copied from /public to /dist
 - added <script defer src="./bundle.js"></script> inside head
 - favicon link added to head
 - file copied from /constants/runtime to configuration.js
@@ -23,6 +23,8 @@
 
 
 ## Experiments in webpack.config.js
+
+- put CopyWebpackPlugin.inject = false and uncomment <script> tag in index.html to move bundle.js at the end of the body
 
 - shift mode to 'production' (different file picked from /constants/runtime)
 

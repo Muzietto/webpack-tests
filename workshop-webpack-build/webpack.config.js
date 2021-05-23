@@ -48,7 +48,7 @@ module.exports = env => {
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, './public', 'index.html'),
         favicon: path.resolve(__dirname, './public/favicon.ico'),
-        inject: true, // set to false if <script src="bundle.js"></script>
+        inject: true, // set to false if <script src="bundle.js"></script> is present in index.html
       }),
       new CopyWebpackPlugin([{
         from: path.resolve(__dirname, `./constants/runtime/${NPC_ENV}.js`),
