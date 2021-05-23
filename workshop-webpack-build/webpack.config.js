@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   mode: 'development', // put to 'production' to create less code
-  devtool: false, // put true to create index.js in Chrome devtools
+  devtool: false, // put 'inline-source-map' to create sourcemap
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
