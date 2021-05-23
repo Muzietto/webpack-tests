@@ -14,6 +14,7 @@
 
 # Observations
 
+- webpack configuration has become a FUNCTION in order to receive env
 - index.html copied from /public to /dist
 - added <script defer src="./bundle.js"></script> inside head
 - favicon link added to head
@@ -24,8 +25,8 @@
 
 ## Experiments in webpack.config.js
 
-- put CopyWebpackPlugin.inject = false and uncomment <script> tag in index.html to move bundle.js at the end of the body
-
 - shift mode to 'production' (different file picked from /constants/runtime)
 
 - enable DefinePlugin in webpack.config.js and access new variable in index.js without polluting the global object
+
+- put CopyWebpackPlugin.inject = false and uncomment <script> tag in index.html to move bundle.js at the end of the body
