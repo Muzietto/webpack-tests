@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="utf-8" />
+     <title>00-vanilla-javascript</title>
+     <script>
+       window.NPC = {};
+     </script>
+     <script>
+       // IIFE (Immediately Invoked Function Expression)
+       (function(namespace) {
+         var pippo = 123;
+         function double(x) { return 2 * x; }
+         // very bad idea: modifying input
+         namespace.doublePippo = double(pippo);
+       })(window.NPC);
+     </script>
+     <script>
+       // better idea: modification outside the module
+       window.NPC.pluto = (function(namespace) {
+         var pluto = false;
+         function negation(x) { return !x; }
+         return negation(pluto);
+       })();
+     </script>
+   </head>
+   <body>
+     <h3>open devtools to see modules at work</h3>
+   </body>
+ </html>

@@ -10,10 +10,8 @@
 
 # Observations
 
-- open index.html in dev tools and check <script> tags position
+- open index.html in dev tools and check <script> tags mandatory positions & window pollution
 
 ## Further experiments
 
-- load index.script-tags.html and verify window pollution by script tags
-
-- load index.modules.html and ...
+- load index-modules.html and see old-fashioned improvements
