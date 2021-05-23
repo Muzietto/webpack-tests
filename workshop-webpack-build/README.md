@@ -3,6 +3,7 @@
 ## Usage
 
 - npm install
+- copy /public/index.html in /dist
 
 ## Available task
 
@@ -16,4 +17,4 @@
 
 - shift mode to 'production' (smaller file, but still no minification)
 
-- set devtools: true; observe main.js & check index.js in Chrome devtools
+- set devtools: 'inline-source-maps'; observe main.js & check index.js in Chrome devtools
