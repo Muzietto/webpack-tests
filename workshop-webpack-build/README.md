@@ -14,8 +14,9 @@
 
 # Observations
 
+- package.json contains different tasks for different environments
 - webpack configuration has become a FUNCTION in order to receive env
-- index.html copied from /public to /dist
+- index.html & favicon.icon copied from /public to /dist
 - added <script defer src="./bundle.js"></script> inside head
 - favicon link added to head
 - file copied from /constants/runtime to configuration.js
