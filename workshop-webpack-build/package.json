@@ -1,31 +1,15 @@
 {
   "name": "workshop-webpack-build",
   "version": "1.0.0",
-  "description": "03-enter-plugins",
+  "description": "00-vanilla-javascript",
   "private": true,
   "scripts": {
-    "start": "node node_modules/http-server/bin/http-server -p 3100 -a localhost ./dist",
-    "build-local": "webpack --env NPC_ENV=local --config=webpack.config.js",
-    "build-production": "webpack --env NPC_ENV=production --config=webpack.config.js"
+    "start": "node node_modules/http-server/bin/http-server -p 3100 -a localhost ."
   },
   "keywords": [],
   "author": "Edenred",
   "license": "MIT",
-  "dependencies": {
-    "jquery": "^3.6.0"
-  },
   "devDependencies": {
-    "@babel/core": "^7.14.3",
-    "@babel/preset-env": "^7.14.2",
-    "babel-loader": "^8.2.2",
-    "copy-webpack-plugin": "^5.1.1",
-    "css-loader": "^5.2.5",
-    "file-loader": "^6.2.0",
-    "html-webpack-plugin": "^5.3.1",
-    "http-server": "^0.12.3",
-    "style-loader": "^2.0.0",
-    "url-loader": "^4.1.1",
-    "webpack": "^5.4.0",
-    "webpack-cli": "^4.2.0"
+    "http-server": "^0.12.3"
   }
 }

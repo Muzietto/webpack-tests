@@ -1,25 +1,19 @@
-# 04-enter-babel
+# 00-vanilla-javascript
 
 ## Usage
 
-- npm install
+- npm install (need http-server)
 
 ## Available tasks
 
-- `npm run build-local`: will create the build inside `/dist` folder, featuring local runtime constants
-
-- `npm run build-production`: will create the build inside `/dist` folder, featuring production runtime constants
-
-- `npm start`: serves files from the `/dist` folder (http://localhost:3100).
+- `npm start`: serves files from the `/` folder (http://localhost:3100).
 
 # Observations
 
-- new file .babelrc; it is also possible to put a field 'babel' in package.json
-- rule for .js + resolve .js extension + @src alias added to webpack.config.js
-- imported.js included in bundle
-- recent ECMAScript operators transpiled into ES5 syntax
-- Array.prototype.flatMap NOT transpiled -->  must polyfill it yourself
+- open index.html in dev tools and check <script> tags position
 
-## Experiments in webpack.config.js
+## Further experiments
 
-- put devtool: 'inline-source-map' in webpack.config.js to have sourcemaps
+- load index.script-tags.html and verify window pollution by script tags
+
+- load index.modules.html and ...
