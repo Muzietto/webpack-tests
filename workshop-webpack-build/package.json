@@ -4,7 +4,7 @@
   "description": "00-vanilla-javascript",
   "private": true,
   "scripts": {
-    "start": "node node_modules/http-server/bin/http-server -p 3100 -a localhost ."
+    "start": "node node_modules/http-server/bin/http-server -p 3100 -a localhost -c-1 ."
   },
   "keywords": [],
   "author": "Edenred",
