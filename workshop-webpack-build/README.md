@@ -15,6 +15,8 @@
 
 ## Experiments in webpack.config.js
 
-- shift mode to 'production' (smaller file, but still no minification)
+- observe main.js - our code is at the end of the file
+
+- shift mode to 'production' (smaller main.js file, but still no minification)
 
 - set devtools: 'inline-source-maps'; observe main.js & check index.js in Chrome devtools
