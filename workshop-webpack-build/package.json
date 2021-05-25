@@ -4,7 +4,7 @@
   "description": "03-enter-plugins",
   "private": true,
   "scripts": {
-    "start": "node node_modules/http-server/bin/http-server -p 3100 -a localhost ./dist",
+    "start": "node node_modules/http-server/bin/http-server -p 3100 -a localhost -c-1 ./dist",
     "build-local": "webpack --env NPC_ENV=local --config=webpack.config.js",
     "build-production": "webpack --env NPC_ENV=production --config=webpack.config.js"
   },
