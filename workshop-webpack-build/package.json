@@ -4,7 +4,7 @@
   "description": "02-asset-management",
   "private": true,
   "scripts": {
-    "start": "node node_modules/http-server/bin/http-server -p 3100 -a localhost ./dist",
+    "start": "node node_modules/http-server/bin/http-server -p 3100 -a localhost -c-1 ./dist",
     "build": "webpack --config webpack.config.js",
     "watch": "webpack --watch --config webpack.config.js"
   },

@@ -15,7 +15,7 @@
 
 # Observations
 
-- tag <style> in head
+- all CSS is inside the bundle <-- !!!
 - png copying/renaming in /dist
 - all assets required by index.js are placed in its source directory
 - index.html must be present in dist before build - UNACCEPTABLE!
