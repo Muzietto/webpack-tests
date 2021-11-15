@@ -4,6 +4,8 @@
 
 - npm install
 
+### You don't need to copy index.html in /dist anymore
+
 ## Available tasks
 
 - `npm run build-local`: will create the build inside `/dist` folder, featuring local runtime constants
