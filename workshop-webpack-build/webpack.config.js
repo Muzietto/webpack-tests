@@ -13,7 +13,7 @@ module.exports = env => {
 
   return {
     mode: 'development', // put to 'production' to create less code
-    devtool: false, // put 'inline-source-map' to create index.js in Chrome devtools
+    devtool: 'inline-source-map', // put false to NOT create index.js in Chrome devtools
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
