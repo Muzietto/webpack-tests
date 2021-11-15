@@ -1,11 +1,13 @@
 import $ from 'jquery';
 import '@src/style.css';
 
-// TODO - add here a jQuery plugin
+$.fn.greenify = function() {
+    this.css('color', 'green');
+};
 
 export default greetingInRootDiv;
 
-function greetingInRootDiv($div = $('#root'), message = '') {
+function greetingInRootDiv($div, message = '') {
   $div
     .addClass('hello')
     .html('Welcome, friend Webpack from ' + message);

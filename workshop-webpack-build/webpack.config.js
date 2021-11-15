@@ -63,7 +63,6 @@ module.exports = env => {
   				'./greetingInRootDiv': './src/imported.js'
   			},
   			shared: {
-          ...deps,
   				'jquery': {
   					singleton: true,
             eager: true,
