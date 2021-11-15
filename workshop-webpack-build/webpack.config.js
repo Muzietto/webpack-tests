@@ -1,7 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const webpack = require('webpack'); // uncomment to enable DefinePlugin
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
+const webpack = require('webpack');
+const deps = require('./package.json').dependencies;
 
 module.exports = env => {
 
@@ -45,7 +47,7 @@ module.exports = env => {
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, './public', 'index.html'),
         favicon: path.resolve(__dirname, './public/favicon.ico'),
-        inject: true, // set to false if <script src="bundle.js"></script> is present in index.html
+        inject: true, // set to false if <script src='bundle.js'></script> is present in index.html
       }),
       new CopyWebpackPlugin([{
         from: path.resolve(__dirname, `./constants/runtime/${NPC_ENV}.js`),
@@ -54,6 +56,21 @@ module.exports = env => {
       new webpack.DefinePlugin({
         ENV2: JSON.stringify(NODE_CONSTANTS),
       }),
+      new ModuleFederationPlugin({
+  			name: 'mfeForWebpackWorkshop',
+  			filename: 'remoteEntry.js',
+  			exposes: {
+  				'./greetingInRootDiv': './src/imported.js'
+  			},
+  			shared: {
+          ...deps,
+  				'jquery': {
+  					singleton: true,
+            eager: true,
+  					requiredVersion: deps.jquery,
+  				},
+  			}
+  		}),
     ],
   };
 };
