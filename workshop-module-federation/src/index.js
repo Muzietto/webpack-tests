@@ -1,15 +1,7 @@
-// import $ from 'jquery';
+import loadDependenciesAndExecute from './asynchronous';
 
-import('module-federation-mfe/greetingInRootDiv')
-  .then(({ default: greetingInRootDiv }) => {
-    import('jquery')
-      .then(({ default: $ }) => {
-        debugger;
-        console.log('CIP');
-        greetingInRootDiv($('#shellRoot'), 'SHELL - please check $.fn in the console');
-      })
+loadDependenciesAndExecute();
 
-  })
-  .catch(err => { debugger; })
-
-// greetingInRootDiv($('#shellRoot'), 'SHELL - please check $.fn in the console');
+setTimeout(() => {
+  console.log('jQuery plugin is ', window.jQuery.fn.greenify);
+}, 500);

@@ -52,9 +52,9 @@ module.exports = env => {
           'module-federation-mfe': 'mfeForWebpackWorkshop@http://localhost:3100/remoteEntry.js',
         },
   			shared: {
-          ...deps,
   				'jquery': {
   					singleton: true,
+            eager: true,
   					requiredVersion: deps.jquery,
   				},
   			}
