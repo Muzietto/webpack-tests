@@ -33,7 +33,7 @@
     "webpack-merge": "4.2.1"
   },
   "dependencies": {
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "babel-eslint": "^10.0.3",
     "eslint-plugin-import": "^2.22.0"
   }
