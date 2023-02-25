@@ -1,7 +1,7 @@
 {
   "name": "workshop-webpack-build",
   "version": "1.0.0",
-  "description": "03-enter-plugins",
+  "description": "04-enter-babel",
   "private": true,
   "scripts": {
     "start": "node node_modules/http-server/bin/http-server -p 3100 -a localhost -c-1 ./dist",
